@@ -9,6 +9,7 @@ function App() {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors, isSubmitting }
   } = useForm();
 
@@ -20,6 +21,7 @@ function App() {
     });
     console.log(data);
     toast.success('Form submitted successfully!');
+    reset(); 
   }
 
   return (
@@ -28,7 +30,6 @@ function App() {
         <h2 className="form-title">Registration Form</h2>
         <ToastContainer />
 
-        {/* First Name */}
         <div className="form-group">
           <label htmlFor="firstname">First Name</label>
           <input
@@ -36,16 +37,12 @@ function App() {
             className={errors.firstname ? 'input-err' : ""}
             {...register('firstname', {
               required: "First name is required",
-              minLength: {
-                value: 3,
-                message: "Name length should be at least three"
-              }
+              minLength: { value: 3, message: "Name length should be at least three" }
             })}
           />
           {errors.firstname && <p className='error-msg'>{errors.firstname.message}</p>}
         </div>
 
-        {/* Middle Name */}
         <div className="form-group">
           <label htmlFor="middlename">Middle Name</label>
           <input
@@ -53,20 +50,13 @@ function App() {
             className={errors.middlename ? 'input-err' : ""}
             {...register('middlename', {
               required: "Middle name is required",
-              minLength: {
-                value: 3,
-                message: "Middle name should be at least 3 characters"
-              },
-              maxLength: {
-                value: 6,
-                message: "Middle name should not exceed 6 characters"
-              }
+              minLength: { value: 3, message: "Middle name should be at least 3 characters" },
+              maxLength: { value: 6, message: "Middle name should not exceed 6 characters" }
             })}
           />
           {errors.middlename && <p className='error-msg'>{errors.middlename.message}</p>}
         </div>
 
-        {/* Last Name */}
         <div className="form-group">
           <label htmlFor="lastname">Last Name</label>
           <input
@@ -74,16 +64,12 @@ function App() {
             className={errors.lastname ? 'input-err' : ""}
             {...register('lastname', {
               required: "Last name is required",
-              pattern: {
-                value: /^[A-Za-z]+$/,
-                message: "Invalid pattern for last name"
-              }
+              pattern: { value: /^[A-Za-z]+$/, message: "Invalid pattern for last name" }
             })}
           />
           {errors.lastname && <p className='error-msg'>{errors.lastname.message}</p>}
         </div>
 
-        {/* Email */}
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -91,16 +77,12 @@ function App() {
             className={errors.email ? 'input-err' : ""}
             {...register('email', {
               required: "Email is required",
-              pattern: {
-                value: /^\S+@\S+$/i,
-                message: "Invalid email address"
-              }
+              pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" }
             })}
           />
           {errors.email && <p className='error-msg'>{errors.email.message}</p>}
         </div>
 
-        {/* Phone */}
         <div className="form-group">
           <label htmlFor="phone">Phone</label>
           <input
@@ -108,16 +90,12 @@ function App() {
             className={errors.phone ? 'input-err' : ""}
             {...register('phone', {
               required: "Phone is required",
-              pattern: {
-                value: /^[0-9]{10}$/,
-                message: "Phone must be 10 digits"
-              }
+              pattern: { value: /^[0-9]{10}$/, message: "Phone must be 10 digits" }
             })}
           />
           {errors.phone && <p className='error-msg'>{errors.phone.message}</p>}
         </div>
 
-        {/* Password */}
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
@@ -125,16 +103,12 @@ function App() {
             className={errors.password ? 'input-err' : ""}
             {...register('password', {
               required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password should be at least 6 characters"
-              }
+              minLength: { value: 6, message: "Password should be at least 6 characters" }
             })}
           />
           {errors.password && <p className='error-msg'>{errors.password.message}</p>}
         </div>
 
-        {/* Confirm Password */}
         <div className="form-group">
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
@@ -147,8 +121,7 @@ function App() {
           />
           {errors.confirmPassword && <p className='error-msg'>{errors.confirmPassword.message}</p>}
         </div>
-
-        {/* Submit */}
+        
         <button type="submit" className="btn-submit" disabled={isSubmitting}>
           {isSubmitting ? 'Submitting...' : 'Submit'}
         </button>
@@ -158,3 +131,4 @@ function App() {
 }
 
 export default App;
+
